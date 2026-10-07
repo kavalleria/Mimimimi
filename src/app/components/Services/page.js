@@ -1,16 +1,24 @@
 import React from "react";
 import Image from "next/image";
-import { Caveat } from "next/font/google";
+import localFont from "next/font/local";
 
-const caveat = Caveat({
-  subsets: ["cyrillic", "latin"],
-  weight: ["400", "500", "600", "700"],
+// Подключение локального шрифта Gogol
+const gogol = localFont({
+  src: "../../../../public/fonts/gogol_regular.otf",
+  display: "swap",
 });
 
 export default function Services() {
-  return (
-    <section className="w-full bg-[#4a6138] relative overflow-hidden py-12 md:py-16 text-white px-4 sm:px-8 lg:px-16 font-sans">
+  // Стили из Figma для основного текста заголовка
+  const mainTitleStyle = {
+    fontSize: "57px",
+    lineHeight: "64px",
+    letterSpacing: "-0.25px",
+  };
 
+  return (
+    <section className="w-full bg-[#3d592b] relative overflow-hidden py-8 md:py-12 px-6 md:px-12 text-white font-sans">
+      {/* Оранжевая закорючка слева */}
       <div className="absolute left-[-20px] top-[26%] sm:top-[28%] md:top-[30%] w-[380px] sm:w-[500px] md:w-[650px] lg:w-[720px] pointer-events-none select-none z-0 opacity-90">
         <Image
           src="/orange-scribble.svg"
@@ -22,30 +30,54 @@ export default function Services() {
         />
       </div>
 
+      {/* Контейнер растягивается на ровно 1400px, как и шапка */}
       <div className="max-w-[1400px] mx-auto relative z-10">
-
-        <div className="relative flex flex-col md:flex-row items-start justify-between mb-8 md:mb-12 gap-6">
-
-          <div className="pt-2">
+        {/* Верхний блок: Плашка слева, заголовок по центру */}
+        <div className="flex flex-col md:flex-row items-start justify-between mb-6 md:mb-8">
+          {/* Плашка "Услуги" выровнена по левому краю (по логотипу шапки) */}
+          <div className="mb-4 md:mb-0 pt-2">
             <span className="inline-block px-6 py-2 rounded-full border border-white/80 text-white font-normal text-sm md:text-base tracking-wide bg-transparent">
               Услуги
             </span>
           </div>
 
-          <div className="text-center mx-auto max-w-2xl lg:max-w-3xl">
-            <h2 className="text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] font-bold leading-[1.15] tracking-tight text-white">
+          {/* Заголовок по центру */}
+          <div className="text-center max-w-2xl lg:max-w-3xl mx-auto">
+            <h2 className="font-bold text-white" style={mainTitleStyle}>
               Мы предоставляем <br />
               <span
-                className={`${caveat.className} font-normal text-4xl sm:text-5xl md:text-[58px] lg:text-[64px] leading-[0.85] lowercase block my-1 text-white`}
+                className={`${gogol.className} block text-white lowercase`}
+                style={{
+                  fontSize: "50px",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  marginBottom: "-8px",
+                }}
               >
                 срочную качественную
               </span>
-              медицинскую помощь <br />
-              вашим питомцам
+              <span
+                className="block"
+                style={{
+                  marginTop: "-16px",
+                  lineHeight: "110%",
+                }}
+              >
+                медицинскую помощь <br />
+                вашим питомцам
+              </span>
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 self-end md:self-center pt-2">
+          {/* Пустой блок для баланса ширины при флексе */}
+          <div className="hidden md:block w-[100px]" />
+        </div>
+
+        {/* Блок со стрелочками: выровнены по правому краю (по бургеру/кнопке) */}
+        <div className="flex justify-end mb-4">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               aria-label="Назад"
@@ -87,23 +119,18 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10">
-
+        {/* Сетка из 4-х карточек — растянута на всю ширину 1400px */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10 w-full">
+          {/* 1. Инструментальная диагностика */}
           <div className="bg-[#e66226] rounded-[22px] p-6 h-[340px] sm:h-[360px] flex flex-col justify-between relative overflow-hidden text-white group cursor-pointer shadow-sm">
-            <div className="relative z-20 w-8 h-8 opacity-90">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path
-                  d="M3 21l8-8M11 13l4-4M15 9l3-3M18 6l2 2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path d="M3 21h5" strokeLinecap="round" />
-              </svg>
+            <div className="relative z-20 w-12 h-12">
+              <Image
+                src="/icon-scalpel.svg"
+                alt="Инструментальная диагностика"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <div
@@ -120,21 +147,16 @@ export default function Services() {
             </h3>
           </div>
 
+          {/* 2. Лабораторные исследования */}
           <div className="bg-[#567042] rounded-[22px] p-6 h-[340px] sm:h-[360px] flex flex-col justify-between relative overflow-hidden text-white group cursor-pointer shadow-sm">
-            <div className="relative z-20 w-8 h-8 opacity-90">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path
-                  d="M9 3h6M10 3v6l-4.5 8.25A2 2 0 007.24 20h9.52a2 2 0 001.74-2.75L14 9V3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path d="M8.5 14h7" strokeLinecap="round" />
-              </svg>
+            <div className="relative z-20 w-12 h-12">
+              <Image
+                src="/icon-flask.svg"
+                alt="Лабораторные исследования"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <div
@@ -151,24 +173,16 @@ export default function Services() {
             </h3>
           </div>
 
+          {/* 3. Хирургия */}
           <div className="bg-[#5d6057] rounded-[22px] p-6 h-[340px] sm:h-[360px] flex flex-col justify-between relative overflow-hidden text-white group cursor-pointer shadow-sm">
-            <div className="relative z-20 w-8 h-8 opacity-90">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <rect
-                  x="3"
-                  y="7"
-                  width="18"
-                  height="10"
-                  rx="3"
-                  transform="rotate(-30 12 12)"
-                />
-                <path d="M10 12h4M12 10v4" strokeLinecap="round" />
-              </svg>
+            <div className="relative z-20 w-12 h-12">
+              <Image
+                src="/icon-plaster.svg"
+                alt="Хирургия"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <div
@@ -183,27 +197,16 @@ export default function Services() {
             </h3>
           </div>
 
-          <div className="bg-[#9DAD98] rounded-[22px] p-6 h-[340px] sm:h-[360px] flex flex-col justify-between relative overflow-hidden text-white group cursor-pointer shadow-sm">
-            <div className="relative z-10 w-8 h-8 opacity-90">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path
-                  d="M6 3v5a6 6 0 0012 0V3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 14v3a3 3 0 003 3h1a2 2 0 100-4h-1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="6" cy="3" r="1" fill="currentColor" />
-                <circle cx="18" cy="3" r="1" fill="currentColor" />
-              </svg>
+          {/* 4. Терапия и профилактика */}
+          <div className="bg-[#567042] rounded-[22px] p-6 h-[340px] sm:h-[360px] flex flex-col justify-between relative overflow-hidden text-white group cursor-pointer shadow-sm">
+            <div className="relative z-10 w-12 h-12">
+              <Image
+                src="/icon-stethoscope.svg"
+                alt="Терапия и профилактика"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <h3 className="relative z-10 text-xl font-medium leading-snug">
@@ -213,6 +216,7 @@ export default function Services() {
           </div>
         </div>
 
+        {/* Кнопка "ВСЕ УСЛУГИ" */}
         <div className="flex justify-center pt-2">
           <button
             type="button"
