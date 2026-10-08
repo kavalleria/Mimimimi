@@ -7,6 +7,7 @@ import About from "./components/About/page";
 import Features from "./components/Features/page";
 import HouseCall from "./components/HouseCall/page";
 import Services from "./components/Services/page";
+import Specialists from "./components/Specialists/page";
 
 const caveat = Caveat({
   subsets: ["cyrillic", "latin"],
@@ -23,6 +24,7 @@ export default function Home() {
       <Features />
       <HouseCall />
       <Services />
+      <Specialists />
     </div>
   );
 }
