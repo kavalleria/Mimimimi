@@ -8,6 +8,8 @@ import Features from "./components/Features/page";
 import HouseCall from "./components/HouseCall/page";
 import Services from "./components/Services/page";
 import Specialists from "./components/Specialists/page";
+import AppointmentForm from "./components/AppointmentForm/page";
+import Contacts from "./components/Contacts/page";
 
 const caveat = Caveat({
   subsets: ["cyrillic", "latin"],
@@ -20,11 +22,34 @@ export default function Home() {
       <Header />
       <Promo />
       <Promotions />
-      <About />
+
+      {/* Секция О клинике */}
+      <section id="about">
+        <About />
+      </section>
+
       <Features />
       <HouseCall />
-      <Services />
-      <Specialists />
+
+      {/* Секция Услуги */}
+      <section id="services">
+        <Services />
+      </section>
+
+      {/* Секция Врачи */}
+      <section id="doctors">
+        <Specialists />
+      </section>
+
+      {/* Форма записи */}
+      <section id="appointment">
+        <AppointmentForm />
+      </section>
+
+      {/* Секция Контакты */}
+      <section id="contacts">
+        <Contacts />
+      </section>
     </div>
   );
 }
